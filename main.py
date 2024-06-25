@@ -129,10 +129,11 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if not user:
-            flash("That email does not exist, please try again.")
+            flash("That email does not exist, please try again!")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
-            flash('Password incorrect, please try again.')
+            flash("Oh no! You've entered an incorrect password."
+                  "Please try again!")
             return redirect(url_for('login'))
         else:
             login_user(user)
@@ -240,4 +241,4 @@ def send_email(name, email, phone, message):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5002)
+    app.run(debug=False, port=5002)
